@@ -1701,20 +1701,23 @@ button {
 }
 /* One-scene brand introduction — paper, stationery, then the shop reveal. */
 .is-loading {
+  height: 100dvh;
   overflow: hidden;
 }
 .brand-loader {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  width: 100vw;
+  min-width: 100%;
+  height: 100dvh;
+  min-height: 100vh;
+  z-index: 9999;
   background: #fff;
   display: grid;
   place-items: center;
   overflow: hidden;
-  transition:
-    transform 0.65s cubic-bezier(0.65, 0, 0.25, 1),
-    clip-path 0.65s cubic-bezier(0.65, 0, 0.25, 1);
-  will-change: transform, clip-path;
+  transition: opacity 0.35s ease;
+  will-change: opacity;
 }
 .brand-loader::before {
   content: "";
@@ -2081,8 +2084,10 @@ button {
   animation: lead-show 0.18s 0.25s forwards;
 }
 .brand-loader.is-exiting {
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 10%);
-  transform: translateY(-2%);
+  clip-path: none;
+  transform: none;
+  opacity: 0;
+  pointer-events: none;
 }
 .brand-loader.is-exiting::before {
   opacity: 1;
@@ -2220,7 +2225,18 @@ button {
 /* Mobile safety net: prevent horizontal scrolling and keep controls usable on narrow screens. */
 html,
 body {
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main,
+header,
+footer,
+section,
+img,
+iframe {
+  max-width: 100%;
 }
 
 .dept-card,
